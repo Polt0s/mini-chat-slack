@@ -3,12 +3,14 @@
 import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const mode = process.env.NODE_ENV || 'development';
+// const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  mode,
+  mode: process.env.NODE_ENV || 'development',
+  entry: './src/index.js',
   externals: {
     gon: 'gon',
+    config: 'config',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -18,8 +20,8 @@ module.exports = {
     publicPath: '/assets/',
   },
   devServer: {
-    host: 'localhost',
-    port: 8080,
+    // host: 'localhost',
+    // port: 8080,
     publicPath: '/assets/',
     compress: true,
   },
