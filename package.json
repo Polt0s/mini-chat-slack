@@ -16,6 +16,7 @@
     "build-app": "cross-env NODE_ENV=production npx webpack --mode production",
     "build": "npm run build-app && npm run build-server",
     "start": "cross-env NODE_ENV=production node dist/bin/slack.js",
+    "watch": "webpack --mode development --watch",
     "postinstall": "npm run build"
   },
   "repository": {
@@ -57,7 +58,9 @@
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "regenerator-runtime": "^0.13.7",
-    "socket.io": "^3.0.3"
+    "socket.io": "^3.0.3",
+    "socket.io-client": "^4.0.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
