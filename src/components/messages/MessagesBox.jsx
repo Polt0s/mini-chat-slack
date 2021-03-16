@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import Message from './Messages.jsx';
-import getRandomUserName from '../../getRandomUserName.js';
 import postSendingMessage from '../../requestServer/sendingMessage.js';
 import Context from '../../ReactContext.jsx';
 
