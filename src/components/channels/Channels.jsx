@@ -15,7 +15,7 @@ const Navbar = () => {
   const channels = useSelector((state) => state.channelsInfo.channels);
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const selectionActiveChannel = (id) => (currentChannelId === id ? 'primary' : 'light');
-  const showModal = (type, extra = null) => dispatch(openModal({ type, extra }));
+  const selectedModal = (type, extra = null) => dispatch(openModal({ type, extra }));
 
   const changeClickActiveId = (id) => () => {
     dispatch(changeChannel({ id }));
@@ -45,8 +45,8 @@ const Navbar = () => {
         </Button>
         <Dropdown.Toggle split variant={selectionActiveChannel(channel.id)} className="flex-grow-0" />
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => showModal('remove', channel)} href="#">Remove</Dropdown.Item>
-          <Dropdown.Item onClick={() => showModal('rename', channel)} href="#">Rename</Dropdown.Item>
+          <Dropdown.Item onClick={() => selectedModal('deleteChannel', channel)} href="#">Remove</Dropdown.Item>
+          <Dropdown.Item onClick={() => selectedModal('rename', channel)} href="#">Rename</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </NavItem>
@@ -64,7 +64,7 @@ const Navbar = () => {
     <div className="col-3 border-right">
       <div className="d-flex mb-2">
         <span>Channels</span>
-        <button type="button" onClick={() => showModal('addChannel')} className="ml-auto p-0 btn btn-link">+</button>
+        <button type="button" onClick={() => selectedModal('addChannel')} className="ml-auto p-0 btn btn-link">+</button>
       </div>
       {renderChannelItems()}
     </div>

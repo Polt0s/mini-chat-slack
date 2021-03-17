@@ -5,7 +5,7 @@ const getRandomUserName = () => {
   const userName = Cookies.get('userName');
   const randomUserName = faker.name.findName();
   if (!userName) {
-    Cookies.set('userName', 'randomUserName');
+    Cookies.set('userName', randomUserName);
     return randomUserName;
   }
   return userName;

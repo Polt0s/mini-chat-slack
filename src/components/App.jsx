@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import Channels from './channels/Channels.jsx';
 import MessagesBox from './messages/MessagesBox.jsx';
 import ModalAddChannel from './modals/ModalAddChannel.jsx';
+import ModalRemoveChannel from './modals/ModalRemoveChannel.jsx';
 
 const modals = {
   addChannel: ModalAddChannel,
+  deleteChannel: ModalRemoveChannel,
 };
 
 const openedModal = (modalName) => modals[modalName];

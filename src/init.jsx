@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import store from './reducers/index.js';
 import App from './components/App.jsx';
 import { addMessage } from './reducers/messages.js';
-import { changeChannel, addChannel } from './reducers/channels.js';
+import { changeChannel, addChannel, deleteChannel } from './reducers/channels.js';
 import getRandomUserName from './getRandomUserName.js';
 import Context from './ReactContext.jsx';
 
@@ -35,6 +35,9 @@ const init = (gon) => {
   });
   socket.on('newChannel', ({ data }) => {
     store.dispatch(addChannel({ data }));
+  });
+  socket.on('deleteChannel', ({ data }) => {
+    store.dispatch(deleteChannel({ data }));
   });
 
   render(
