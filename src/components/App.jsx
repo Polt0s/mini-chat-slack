@@ -4,20 +4,21 @@ import Channels from './channels/Channels.jsx';
 import MessagesBox from './messages/MessagesBox.jsx';
 import ModalAddChannel from './modals/ModalAddChannel.jsx';
 import ModalRemoveChannel from './modals/ModalRemoveChannel.jsx';
+import ModalRenameChannel from './modals/ModalRenameChannel.jsx';
 
 const modals = {
   addChannel: ModalAddChannel,
   deleteChannel: ModalRemoveChannel,
+  renameChannel: ModalRenameChannel,
 };
 
-const openedModal = (modalName) => modals[modalName];
+const selectModal = (modalName) => modals[modalName];
 
 const renderModal = ({ modalInfo }) => {
   if (!modalInfo.isOpened) {
     return null;
   }
-
-  const Modal = openedModal(modalInfo.type);
+  const Modal = selectModal(modalInfo.type);
   return <Modal modalInfo={modalInfo} />;
 };
 

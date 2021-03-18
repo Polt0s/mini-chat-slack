@@ -6,16 +6,15 @@ const Message = () => {
   const messages = useSelector((state) => state.messagesInfo.messages.filter(
     ({ channelId }) => channelId === activeId,
   ));
-  // console.log(messages)
   const renderMessage = () => (
     <>
       {messages.map((message) => (
         <div key={message.id} className="text-break">
           <b>
-            {message.author}
+            {message.nickname}
             :
           </b>
-          {message.text}
+          {message.body}
         </div>
       ))}
     </>

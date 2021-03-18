@@ -15,7 +15,7 @@ const MessagesBox = () => {
     },
     onSubmit: async (values, { resetForm }) => {
       const { message } = values;
-      const messageData = { author: userName, text: message };
+      const messageData = { nickname: userName, body: message };
       await postSendingMessage(messageData, currentChannelId);
       resetForm(values);
     },

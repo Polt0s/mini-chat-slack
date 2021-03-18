@@ -1,7 +1,7 @@
 import axios from 'axios';
 import router from '../routes.js';
 
-const sendingChannel = async (name) => {
+const sendingAddChannel = async (name) => {
   const attributes = { ...name };
   try {
     const response = await axios.post(router.channelsPath(), {
@@ -14,4 +14,4 @@ const sendingChannel = async (name) => {
   }
 };
 
-export default sendingChannel;
+export default sendingAddChannel;

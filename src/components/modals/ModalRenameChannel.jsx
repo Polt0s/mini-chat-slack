@@ -9,12 +9,12 @@ import {
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import sendingAddChannel from '../../requestServer/sendingAddChannel.js';
+import sendingRenameChannel from '../../requestServer/sendingRenameChannel.js';
 import { closeModal } from '../../reducers/modal.js';
 
-const ModalAddChannel = (props) => {
-  const { modalInfo: { isOpened } } = props;
+const ModalRenameChannel = (props) => {
   const dispatch = useDispatch();
+  const { modalInfo: { isOpened, extra } } = props;
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -22,15 +22,15 @@ const ModalAddChannel = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      text: '',
+      text: extra.name,
     },
     validationSchema: yup.object({
-      text: yup.string().min(3).max(20).required('Must be 3 to 20 characters'),
+      text: yup.string().min(3).max(20).required('Must be 3 to 20 character'),
     }),
     onSubmit: async (values, { resetForm }) => {
       const { text } = values;
-      const channelData = { name: text };
-      await sendingAddChannel(channelData);
+      const data = { name: text };
+      await sendingRenameChannel(extra.id, data);
       resetForm(values);
       handleClose();
     },
@@ -38,8 +38,8 @@ const ModalAddChannel = (props) => {
 
   return (
     <Modal show={isOpened} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Add channel</Modal.Title>
+      <Modal.Header>
+        <Modal.Title>Rename channel</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -70,4 +70,4 @@ const ModalAddChannel = (props) => {
   );
 };
 
-export default ModalAddChannel;
+export default ModalRenameChannel;

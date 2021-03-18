@@ -46,7 +46,7 @@ const Navbar = () => {
         <Dropdown.Toggle split variant={selectionActiveChannel(channel.id)} className="flex-grow-0" />
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => selectedModal('deleteChannel', channel)} href="#">Remove</Dropdown.Item>
-          <Dropdown.Item onClick={() => selectedModal('rename', channel)} href="#">Rename</Dropdown.Item>
+          <Dropdown.Item onClick={() => selectedModal('renameChannel', channel)} href="#">Rename</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </NavItem>
