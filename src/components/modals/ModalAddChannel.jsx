@@ -7,9 +7,9 @@ import {
   Form,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import sendingAddChannel from '../../requestServer/sendingAddChannel.js';
 import { closeModal } from '../../reducers/modal.js';
+import getValidationSchema from '../../validateSchema.js';
 
 const ModalAddChannel = (props) => {
   const { modalInfo: { isOpened } } = props;
@@ -23,12 +23,7 @@ const ModalAddChannel = (props) => {
     initialValues: {
       text: '',
     },
-    validationSchema: yup.object({
-      text: yup.string()
-        .min(3, 'Must be 3 to 20 character')
-        .max(20, 'Must be 3 to 20 character')
-        .required('required'),
-    }),
+    validationSchema: getValidationSchema(),
     onSubmit: async (values, { resetForm }) => {
       const { text } = values;
       const channelData = { name: text };
@@ -47,7 +42,6 @@ const ModalAddChannel = (props) => {
         <Modal.Body>
           <FormControl
             name="text"
-            type="text"
             className="mb-2"
             value={formik.values.text}
             onChange={formik.handleChange}

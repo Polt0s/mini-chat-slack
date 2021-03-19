@@ -7,9 +7,9 @@ import {
   Form,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import sendingRenameChannel from '../../requestServer/sendingRenameChannel.js';
 import { closeModal } from '../../reducers/modal.js';
+import getValidationSchema from '../../validateSchema.js';
 
 const ModalRenameChannel = (props) => {
   const dispatch = useDispatch();
@@ -23,12 +23,7 @@ const ModalRenameChannel = (props) => {
     initialValues: {
       text: extra.name,
     },
-    validationSchema: yup.object({
-      text: yup.string()
-        .min(3, 'Must be 3 to 20 character')
-        .max(20, 'Must be 3 to 20 character')
-        .required('required'),
-    }),
+    validationSchema: getValidationSchema(),
     onSubmit: async (values, { resetForm }) => {
       const { text } = values;
       const data = { name: text };
@@ -43,13 +38,12 @@ const ModalRenameChannel = (props) => {
       <Modal.Header>
         <Modal.Title>Rename channel</Modal.Title>
       </Modal.Header>
-      <Form onSubmit={formik.handleSubmit}>
-        <Modal.Body>
+      <Modal.Body>
+        <Form onSubmit={formik.handleSubmit}>
           <FormControl
             name="text"
-            type="text"
-            className="mb-2"
             value={formik.values.text}
+            className="mb-2"
             onChange={formik.handleChange}
             isInvalid={formik.touched.text && formik.errors.text}
           />
@@ -64,8 +58,8 @@ const ModalRenameChannel = (props) => {
               Submit
             </Button>
           </div>
-        </Modal.Body>
-      </Form>
+        </Form>
+      </Modal.Body>
     </Modal>
   );
 };
