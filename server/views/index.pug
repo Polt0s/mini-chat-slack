@@ -3,6 +3,8 @@ html.h-100(lang="en")
   head
     title= Title
     link(href=assetPath('main.css') rel="stylesheet")
+    script
+      include ../rollbar.js
     script.
       var gon = !{JSON.stringify(gon)};
   body.d-flex.flex-column.h-100
