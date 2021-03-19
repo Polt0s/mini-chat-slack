@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  Button,
   Modal,
   FormControl,
   FormGroup,
@@ -11,6 +10,7 @@ import { useFormik } from 'formik';
 import sendingAddChannel from '../../requestServer/sendingAddChannel.js';
 import { closeModal } from '../../reducers/modal.js';
 import getValidationSchema from '../../validateSchema.js';
+import RenderButton from './RenderButton.jsx';
 
 const ModalAddChannel = (props) => {
   const { modalInfo: { isOpened } } = props;
@@ -54,14 +54,7 @@ const ModalAddChannel = (props) => {
                 <div>{formik.errors.text}</div>
               ) : null}
             </div>
-            <div className="d-flex justify-content-end">
-              <Button className="mr-2" variant="secondary" disabled={formik.isSubmitting} onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button type="submit" variant="primary" disabled={formik.isSubmitting}>
-                Submit
-              </Button>
-            </div>
+            <RenderButton formik={formik} handleClose={handleClose} />
           </FormGroup>
         </Modal.Body>
       </Form>
