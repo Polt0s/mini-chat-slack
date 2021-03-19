@@ -4,6 +4,7 @@ import {
   Button,
   Modal,
   FormControl,
+  FormGroup,
   Form,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
@@ -40,24 +41,28 @@ const ModalAddChannel = (props) => {
       </Modal.Header>
       <Form onSubmit={formik.handleSubmit}>
         <Modal.Body>
-          <FormControl
-            name="text"
-            className="mb-2"
-            value={formik.values.text}
-            onChange={formik.handleChange}
-            isInvalid={formik.touched.text && formik.errors.text}
-          />
-          {formik.touched.text && formik.errors.text ? (
-            <div className="d-block mb-2 invalid-feedback" style={{ color: 'red' }}>{formik.errors.text}</div>
-          ) : null}
-          <div className="d-flex justify-content-end">
-            <Button className="mr-2" variant="secondary" disabled={formik.isSubmitting} onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button type="submit" variant="primary" disabled={formik.isSubmitting}>
-              Submit
-            </Button>
-          </div>
+          <FormGroup>
+            <FormControl
+              name="text"
+              className="mb-2"
+              value={formik.values.text}
+              onChange={formik.handleChange}
+              isInvalid={formik.touched.text && formik.errors.text}
+            />
+            <div className="d-block mb-2 invalid-feedback" style={{ color: 'red' }}>
+              {formik.touched.text && formik.errors.text ? (
+                <div>{formik.errors.text}</div>
+              ) : null}
+            </div>
+            <div className="d-flex justify-content-end">
+              <Button className="mr-2" variant="secondary" disabled={formik.isSubmitting} onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button type="submit" variant="primary" disabled={formik.isSubmitting}>
+                Submit
+              </Button>
+            </div>
+          </FormGroup>
         </Modal.Body>
       </Form>
     </Modal>

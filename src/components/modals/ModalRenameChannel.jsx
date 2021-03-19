@@ -54,7 +54,7 @@ const ModalRenameChannel = (props) => {
             <Button className="mr-2" variant="secondary" disabled={formik.isSubmitting} onClick={handleClose}>
               Cancel
             </Button>
-            <Button type="submit" variant="primary" disabled={formik.isSubmitting}>
+            <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
               Submit
             </Button>
           </div>
