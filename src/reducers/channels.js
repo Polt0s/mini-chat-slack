@@ -1,12 +1,26 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import gon from 'gon';
+import postDeleteChannel from '../requestServer/sendingDeleteChannel.js';
+
+export const removeChannelExtra = createAsyncThunk(
+  'removeChannel',
+  async ({ id }) => {
+    try {
+      const response = await postDeleteChannel(id);
+      return response;
+    } catch (err) {
+      return err.message;
+    }
+  },
+);
 
 const channelsSlice = createSlice({
   name: 'channelsInfo',
   initialState: {
     channels: [],
     currentChannelId: gon.currentChannelId,
+    status: 'idle',
   },
   reducers: {
     changeChannel: (state, { payload: { id } }) => {
@@ -16,13 +30,24 @@ const channelsSlice = createSlice({
       state.channels.push(attributes);
       state.currentChannelId = id;
     },
-    deleteChannel: (state, { payload: { data: { id } } }) => {
+    removeChannel: (state, { payload: { data: { id } } }) => {
       state.channels.filter((item) => item.id !== id);
-      state.currentChannelId = id;
+      state.currentChannelId = gon.currentChannelId;
     },
     renameChannel: (state, { payload: { data: { id, attributes: { name } } } }) => {
       const channel = state.channels.find((item) => item.id === id);
       channel.name = name;
+    },
+  },
+  extraReducers: {
+    [removeChannelExtra.idle]: (state) => {
+      state.status = 'idle';
+    },
+    [removeChannelExtra.filling]: (state) => {
+      state.status = 'filling';
+    },
+    [removeChannelExtra.failed]: (state) => {
+      state.status = 'failed';
     },
   },
 });
@@ -30,7 +55,7 @@ const channelsSlice = createSlice({
 export const {
   changeChannel,
   addChannel,
-  deleteChannel,
+  removeChannel,
   renameChannel,
 } = channelsSlice.actions;
 

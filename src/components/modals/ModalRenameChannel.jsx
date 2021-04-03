@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, FormControl, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import sendingRenameChannel from '../../requestServer/sendingRenameChannel.js';
@@ -8,6 +8,8 @@ import getValidationSchema from '../../validateSchema.js';
 import RenderButton from './RenderButton.jsx';
 
 const ModalRenameChannel = (props) => {
+  const channels = useSelector((state) => state.channelsInfo.channels);
+  const uniqueName = channels.map(({ name }) => name);
   const dispatch = useDispatch();
   const { modalInfo: { isOpened, extra } } = props;
 
@@ -19,7 +21,7 @@ const ModalRenameChannel = (props) => {
     initialValues: {
       text: extra.name,
     },
-    validationSchema: getValidationSchema(),
+    validationSchema: getValidationSchema(uniqueName),
     onSubmit: async (values, { resetForm }) => {
       const { text } = values;
       const data = { name: text };

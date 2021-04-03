@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { removeChannelExtra } from './channels.js';
 
 const messagesSlice = createSlice({
   name: 'messagesInfo',
@@ -8,6 +9,12 @@ const messagesSlice = createSlice({
   reducers: {
     addMessage: (state, { payload: { data: { attributes } } }) => {
       state.messages.push(attributes);
+    },
+  },
+  extraReducers: {
+    [removeChannelExtra.filling]: (state, { payload: { data: { id } } }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.messages = state.messages.filter((item) => item.channelId !== id);
     },
   },
 });

@@ -8,7 +8,7 @@ import { addMessage } from './reducers/messages.js';
 import {
   changeChannel,
   addChannel,
-  deleteChannel,
+  removeChannel,
   renameChannel,
 } from './reducers/channels.js';
 import getRandomUserName from './getRandomUserName.js';
@@ -40,8 +40,8 @@ const init = (gon) => {
   socket.on('newChannel', ({ data }) => {
     store.dispatch(addChannel({ data }));
   });
-  socket.on('deleteChannel', ({ data }) => {
-    store.dispatch(deleteChannel({ data }));
+  socket.on('removeChannel', ({ data }) => {
+    store.dispatch(removeChannel({ data }));
   });
   socket.on('renameChannel', ({ data }) => {
     store.dispatch(renameChannel({ data }));

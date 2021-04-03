@@ -10,7 +10,7 @@ import {
 import { changeChannel } from '../../reducers/channels.js';
 import { openModal } from '../../reducers/modal.js';
 
-const Navbar = () => {
+const Channels = () => {
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channelsInfo.channels);
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
@@ -34,7 +34,7 @@ const Navbar = () => {
   );
 
   const getCreatedChannels = (channel) => (
-    <NavItem key={channel.name} as="li">
+    <NavItem key={channel.id} as="li">
       <Dropdown as={ButtonGroup} className="d-flex mb-2">
         <Button
           onClick={changeClickActiveId(channel.id)}
@@ -45,8 +45,8 @@ const Navbar = () => {
         </Button>
         <Dropdown.Toggle split variant={selectionActiveChannel(channel.id)} className="flex-grow-0" />
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => selectedModal('deleteChannel', channel)} href="#">Remove</Dropdown.Item>
-          <Dropdown.Item onClick={() => selectedModal('renameChannel', channel)} href="#">Rename</Dropdown.Item>
+          <Dropdown.Item onClick={() => selectedModal('removeChannel', channel)}>Remove</Dropdown.Item>
+          <Dropdown.Item onClick={() => selectedModal('renameChannel', channel)}>Rename</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </NavItem>
@@ -71,4 +71,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Channels;

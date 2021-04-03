@@ -12,7 +12,7 @@ const Message = () => {
         <div key={message.id} className="text-break">
           <b>
             {message.nickname}
-            :
+            {': '}
           </b>
           {message.body}
         </div>

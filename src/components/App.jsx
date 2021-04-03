@@ -8,7 +8,7 @@ import ModalRenameChannel from './modals/ModalRenameChannel.jsx';
 
 const modals = {
   addChannel: ModalAddChannel,
-  deleteChannel: ModalRemoveChannel,
+  removeChannel: ModalRemoveChannel,
   renameChannel: ModalRenameChannel,
 };
 

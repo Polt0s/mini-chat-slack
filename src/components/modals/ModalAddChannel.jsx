@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Modal,
   FormControl,
@@ -13,6 +13,8 @@ import getValidationSchema from '../../validateSchema.js';
 import RenderButton from './RenderButton.jsx';
 
 const ModalAddChannel = (props) => {
+  const channels = useSelector((state) => state.channelsInfo.channels);
+  const uniqueName = channels.map(({ name }) => name);
   const { modalInfo: { isOpened } } = props;
   const dispatch = useDispatch();
 
@@ -24,10 +26,10 @@ const ModalAddChannel = (props) => {
     initialValues: {
       text: '',
     },
-    validationSchema: getValidationSchema(),
+    validationSchema: getValidationSchema(uniqueName),
     onSubmit: async (values, { resetForm }) => {
       const { text } = values;
-      const channelData = { name: text };
+      const channelData = { name: text.trim() };
       await sendingAddChannel(channelData);
       resetForm(values);
       handleClose();

@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import { removeChannelExtra } from './channels.js';
 
 const modalSlice = createSlice({
   name: 'modal',
@@ -15,6 +16,13 @@ const modalSlice = createSlice({
       state.extra = extra;
     },
     closeModal: (state) => {
+      state.isOpened = false;
+      state.type = null;
+      state.extra = null;
+    },
+  },
+  extraReducers: {
+    [removeChannelExtra.filling]: (state) => {
       state.isOpened = false;
       state.type = null;
       state.extra = null;

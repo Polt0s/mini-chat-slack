@@ -15,9 +15,13 @@ const MessagesBox = () => {
     },
     onSubmit: async (values, { resetForm }) => {
       const { message } = values;
+      if (!message.trim()) {
+        return null;
+      }
       const messageData = { nickname: userName, body: message };
       await postSendingMessage(messageData, currentChannelId);
       resetForm(values);
+      return null;
     },
   });
 
