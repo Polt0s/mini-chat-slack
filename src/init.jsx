@@ -16,6 +16,7 @@ import Context from './ReactContext.jsx';
 
 const init = (gon) => {
   const { channels, messages, currentChannelId } = gon;
+
   store.dispatch(changeChannel({ id: currentChannelId }));
 
   messages.map((message) => {

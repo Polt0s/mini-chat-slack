@@ -20,8 +20,6 @@ module.exports = {
     publicPath: '/assets/',
   },
   devServer: {
-    // host: 'localhost',
-    // port: 8080,
     publicPath: '/assets/',
     compress: true,
   },
