@@ -1,14 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Form, Button, InputGroup } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import Message from './Messages.jsx';
-import postSendingMessage from '../../requestServer/sendingMessage.js';
-import Context from '../../ReactContext.jsx';
+import useApi from '../../hooks/useApi.js';
 
 const MessagesBox = () => {
+  const { sendMessage } = useApi();
+  const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
-  const userName = useContext(Context);
+  const parseUser = JSON.parse(localStorage.getItem('user'));
+  const userName = parseUser.username;
+
   const formik = useFormik({
     initialValues: {
       message: '',
@@ -18,8 +22,8 @@ const MessagesBox = () => {
       if (!message.trim()) {
         return null;
       }
-      const messageData = { nickname: userName, body: message };
-      await postSendingMessage(messageData, currentChannelId);
+      const messageData = { nickname: userName, body: message, currentChannelId };
+      await sendMessage(messageData);
       resetForm(values);
       return null;
     },
@@ -40,7 +44,7 @@ const MessagesBox = () => {
                   onChange={formik.handleChange}
                   value={formik.values.message}
                 />
-                <Button variant="primary" type="submit">Submit</Button>
+                <Button variant="primary" type="submit">{t('submitButton')}</Button>
               </InputGroup>
             </Form.Group>
           </Form>

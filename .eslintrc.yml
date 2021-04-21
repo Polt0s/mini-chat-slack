@@ -1,11 +1,12 @@
 ---
 
+root: true
+
 plugins:
   - functional
 
 extends:
   - airbnb
-  - "plugin:jest/recommended"
   - "plugin:functional/external-recommended"
   - "plugin:functional/recommended"
 

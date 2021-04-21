@@ -7,10 +7,12 @@ import {
   ButtonGroup,
   Dropdown,
 } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { changeChannel } from '../../reducers/channels.js';
 import { openModal } from '../../reducers/modal.js';
 
 const Channels = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channelsInfo.channels);
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
@@ -21,7 +23,7 @@ const Channels = () => {
     dispatch(changeChannel({ id }));
   };
 
-  const getMainChannels = (channel) => (
+  const mainChannels = (channel) => (
     <NavItem key={channel.id} as="li">
       <Button
         onClick={changeClickActiveId(channel.id)}
@@ -33,7 +35,7 @@ const Channels = () => {
     </NavItem>
   );
 
-  const getCreatedChannels = (channel) => (
+  const createdChannels = (channel) => (
     <NavItem key={channel.id} as="li">
       <Dropdown as={ButtonGroup} className="d-flex mb-2">
         <Button
@@ -45,8 +47,8 @@ const Channels = () => {
         </Button>
         <Dropdown.Toggle split variant={selectionActiveChannel(channel.id)} className="flex-grow-0" />
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => selectedModal('removeChannel', channel)}>Remove</Dropdown.Item>
-          <Dropdown.Item onClick={() => selectedModal('renameChannel', channel)}>Rename</Dropdown.Item>
+          <Dropdown.Item onClick={() => selectedModal('removeChannel', channel)}>{t('buttonDelete')}</Dropdown.Item>
+          <Dropdown.Item onClick={() => selectedModal('renameChannel', channel)}>{t('bottonRename')}</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </NavItem>
@@ -55,7 +57,7 @@ const Channels = () => {
   const renderChannelItems = () => (
     <Nav fill variant="pills" as="ul" className="flex-column">
       {channels.map((channel) => (
-        channel.removable ? getCreatedChannels(channel) : getMainChannels(channel)
+        channel.removable ? createdChannels(channel) : mainChannels(channel)
       ))}
     </Nav>
   );
@@ -63,7 +65,7 @@ const Channels = () => {
   return (
     <div className="col-3 border-right">
       <div className="d-flex mb-2">
-        <span>Channels</span>
+        <span>{t('channel')}</span>
         <button type="button" onClick={() => selectedModal('addChannel')} className="ml-auto p-0 btn btn-link">+</button>
       </div>
       {renderChannelItems()}

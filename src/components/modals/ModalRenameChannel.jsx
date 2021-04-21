@@ -1,17 +1,20 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, FormControl, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import sendingRenameChannel from '../../requestServer/sendingRenameChannel.js';
 import { closeModal } from '../../reducers/modal.js';
 import getValidationSchema from '../../validateSchema.js';
 import RenderButton from './RenderButton.jsx';
+import useApi from '../../hooks/useApi.js';
 
 const ModalRenameChannel = (props) => {
-  const channels = useSelector((state) => state.channelsInfo.channels);
-  const uniqueName = channels.map(({ name }) => name);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { renameChannel } = useApi();
+  const channels = useSelector((state) => state.channelsInfo.channels);
   const { modalInfo: { isOpened, extra } } = props;
+  const uniqueName = channels.map(({ name }) => name);
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -24,8 +27,9 @@ const ModalRenameChannel = (props) => {
     validationSchema: getValidationSchema(uniqueName),
     onSubmit: async (values, { resetForm }) => {
       const { text } = values;
-      const data = { name: text };
-      await sendingRenameChannel(extra.id, data);
+      const { id } = extra;
+      const data = { id, name: text };
+      await renameChannel(data);
       resetForm(values);
       handleClose();
     },
@@ -34,7 +38,7 @@ const ModalRenameChannel = (props) => {
   return (
     <Modal show={isOpened} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Rename channel</Modal.Title>
+        <Modal.Title>{t('modals.renameChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>

@@ -1,0 +1,37 @@
+export default {
+  translation: {
+    signOut: 'Выйти',
+    title: 'Hexlet Chat',
+    channel: 'Каналы',
+    submitButton: 'Отправить',
+    bottonRename: 'Переименовать',
+    buttonDelete: 'Удалить',
+    singIn: {
+      username: 'Ваш ник',
+      password: 'Пароль',
+      signInbutton: 'Войти',
+      notAccount: 'Нет аккаунта?',
+      registration: 'Регистрация',
+      incorrectLoginOrPassword: 'Неправильный логин или пароль',
+    },
+    signUp: {
+      username: 'Имя пользователя',
+      placeholderUsername: 'От 3 до 20 символов',
+      password: 'Пароль',
+      placeholderPassword: 'Не менее 6 символов',
+      confirmPassword: 'Подтвердите пароль',
+      placeholderConfirmPassword: 'Пароли должны совпадать',
+      signUpButton: 'Зарегистрироваться',
+      userAlreadyExists: 'Пользователь уже существует',
+    },
+    modals: {
+      addChannel: 'Добавить канал',
+      removeChannel: 'Удалить канал',
+      renameChannel: 'Переименовать канал',
+      buttonClose: 'Отменить',
+      buttonDelete: 'Удалить',
+      buttonSend: 'Отправить',
+      textSure: 'Уверены?',
+    },
+  },
+};

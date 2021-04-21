@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { removeChannelExtra } from './channels.js';
 
@@ -7,14 +8,15 @@ const messagesSlice = createSlice({
     messages: [],
   },
   reducers: {
-    addMessage: (state, { payload: { data: { attributes } } }) => {
-      state.messages.push(attributes);
+    addMessage: (state, { payload: data }) => {
+      if (!state.messages.some((message) => message.id === data.id)) {
+        state.messages.push(data);
+      }
     },
   },
   extraReducers: {
-    [removeChannelExtra.filling]: (state, { payload: { data: { id } } }) => {
-      // eslint-disable-next-line no-param-reassign
-      state.messages = state.messages.filter((item) => item.channelId !== id);
+    [removeChannelExtra.filling]: (state, { payload: data }) => {
+      state.messages = state.messages.filter((item) => item.channelId !== data.id);
     },
   },
 });

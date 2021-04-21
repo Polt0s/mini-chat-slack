@@ -1,9 +1,9 @@
 // @ts-check
 
-import path from 'path';
+// TODO rewrite tests
 import buildApp from '../server/index.js';
 
-const buildUrl = (url) => path.join('/api/v1/', url);
+const buildUrl = (url) => `/api/v1/${url}`;
 
 test('get /channels', async () => {
   const app = buildApp({ port: 5000 });

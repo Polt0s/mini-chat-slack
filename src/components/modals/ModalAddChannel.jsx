@@ -6,17 +6,20 @@ import {
   FormGroup,
   Form,
 } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import sendingAddChannel from '../../requestServer/sendingAddChannel.js';
 import { closeModal } from '../../reducers/modal.js';
 import getValidationSchema from '../../validateSchema.js';
 import RenderButton from './RenderButton.jsx';
+import useApi from '../../hooks/useApi.js';
 
 const ModalAddChannel = (props) => {
-  const channels = useSelector((state) => state.channelsInfo.channels);
-  const uniqueName = channels.map(({ name }) => name);
-  const { modalInfo: { isOpened } } = props;
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { createChannel } = useApi();
+  const channels = useSelector((state) => state.channelsInfo.channels);
+  const { modalInfo: { isOpened } } = props;
+  const uniqueName = channels.map(({ name }) => name);
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -30,7 +33,7 @@ const ModalAddChannel = (props) => {
     onSubmit: async (values, { resetForm }) => {
       const { text } = values;
       const channelData = { name: text.trim() };
-      await sendingAddChannel(channelData);
+      await createChannel(channelData);
       resetForm(values);
       handleClose();
     },
@@ -39,7 +42,7 @@ const ModalAddChannel = (props) => {
   return (
     <Modal show={isOpened} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Add channel</Modal.Title>
+        <Modal.Title>{t('modals.addChannel')}</Modal.Title>
       </Modal.Header>
       <Form onSubmit={formik.handleSubmit}>
         <Modal.Body>

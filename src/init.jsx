@@ -1,58 +1,50 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { initReactI18next } from 'react-i18next';
+import i18n from 'i18next';
 import io from 'socket.io-client';
 import store from './reducers/index.js';
 import App from './components/App.jsx';
+import resources from './locales/index.js';
 import { addMessage } from './reducers/messages.js';
 import {
-  changeChannel,
   addChannel,
   removeChannel,
   renameChannel,
 } from './reducers/channels.js';
-import getRandomUserName from './getRandomUserName.js';
-import Context from './ReactContext.jsx';
 
-const init = (gon) => {
-  const { channels, messages, currentChannelId } = gon;
+const init = () => {
+  i18n
+    .use(initReactI18next)
+    .init({
+      resources,
+      lng: 'ru',
+      fallbackLng: 'ru',
 
-  store.dispatch(changeChannel({ id: currentChannelId }));
-
-  messages.map((message) => {
-    const data = { attributes: message };
-    store.dispatch(addMessage({ data }));
-    return null;
-  });
-
-  channels.map((channel) => {
-    const data = {
-      id: channel.id,
-      attributes: channel,
-    };
-    store.dispatch(addChannel({ data }));
-    return null;
-  });
+      interpolation: {
+        escapeValue: false,
+      },
+    });
 
   const socket = io();
-  socket.on('newMessage', ({ data }) => {
-    store.dispatch(addMessage({ data }));
+
+  socket.on('newMessage', (data) => {
+    store.dispatch(addMessage(data));
   });
-  socket.on('newChannel', ({ data }) => {
-    store.dispatch(addChannel({ data }));
+  socket.on('newChannel', (data) => {
+    store.dispatch(addChannel(data));
   });
-  socket.on('removeChannel', ({ data }) => {
-    store.dispatch(removeChannel({ data }));
+  socket.on('removeChannel', (data) => {
+    store.dispatch(removeChannel(data));
   });
-  socket.on('renameChannel', ({ data }) => {
-    store.dispatch(renameChannel({ data }));
+  socket.on('renameChannel', (data) => {
+    store.dispatch(renameChannel(data));
   });
 
   render(
     <Provider store={store}>
-      <Context.Provider value={getRandomUserName()}>
-        <App />
-      </Context.Provider>
+      <App />
     </Provider>,
     document.getElementById('chat'),
   );
