@@ -6,7 +6,6 @@ const sendingDataSignUpForm = async (username, password) => {
       username,
       password,
     });
-    console.log(response);
     if (response.status === 201) {
       localStorage.setItem('user', JSON.stringify(response.data));
     }
