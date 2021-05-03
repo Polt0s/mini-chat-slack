@@ -52,6 +52,7 @@ const SignInForm = () => {
                   <InputElements
                     placeholder="name"
                     label={t('singIn.username')}
+                    id="username"
                     name="username"
                     type="text"
                   />
@@ -61,6 +62,7 @@ const SignInForm = () => {
                     placeholder="******"
                     label={t('singIn.password')}
                     name="password"
+                    id="password"
                     type="password"
                   />
                   <div style={{ color: 'red', textAlign: 'center' }}>{isError}</div>
