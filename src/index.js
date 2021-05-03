@@ -3,6 +3,7 @@
 import 'core-js/stable/index.js';
 import 'regenerator-runtime/runtime.js';
 import io from 'socket.io-client';
+import { render } from 'react-dom';
 
 import '../assets/application.scss';
 
@@ -14,4 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const socket = io();
 
-init(socket);
+render(
+  init(socket),
+  document.getElementById('chat'),
+);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
@@ -39,11 +38,10 @@ const init = (socket) => {
     store.dispatch(renameChannel(data));
   });
 
-  render(
+  return (
     <Provider store={store}>
       <App />
-    </Provider>,
-    document.getElementById('chat'),
+    </Provider>
   );
 };
 
