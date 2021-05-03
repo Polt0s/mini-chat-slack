@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
-import io from 'socket.io-client';
 import store from './reducers/index.js';
 import App from './components/App.jsx';
 import resources from './locales/index.js';
@@ -14,7 +13,7 @@ import {
   renameChannel,
 } from './reducers/channels.js';
 
-const init = () => {
+const init = (socket) => {
   i18n
     .use(initReactI18next)
     .init({
@@ -26,8 +25,6 @@ const init = () => {
         escapeValue: false,
       },
     });
-
-  const socket = io();
 
   socket.on('newMessage', (data) => {
     store.dispatch(addMessage(data));
