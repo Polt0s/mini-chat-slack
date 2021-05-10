@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -70,7 +70,7 @@ const SignInForm = () => {
                 <button type="submit" className="w-100 mb-3 btn btn-primary" disabled={!formik.isValid}>{t('singIn.signInbutton')}</button>
                 <div className="d-flex flex-column align-items-center">
                   <span className="small mb-2">{t('singIn.notAccount')}</span>
-                  <a href="/signup">{t('singIn.registration')}</a>
+                  <NavLink to="/signup">{t('singIn.registration')}</NavLink>
                 </div>
               </Form>
             )}
