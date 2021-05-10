@@ -60,6 +60,7 @@ const SignUpForm = () => {
                   <InputElements
                     placeholder={t('signUp.placeholderUsername')}
                     label={t('signUp.username')}
+                    id="username"
                     name="username"
                     type="text"
                     autoFocus="true"
@@ -69,6 +70,7 @@ const SignUpForm = () => {
                   <InputElements
                     placeholder={t('signUp.placeholderPassword')}
                     label={t('signUp.password')}
+                    id="password"
                     name="password"
                     type="password"
                   />
@@ -77,6 +79,7 @@ const SignUpForm = () => {
                   <InputElements
                     placeholder={t('signUp.placeholderConfirmPassword')}
                     label={t('signUp.confirmPassword')}
+                    id="confirmPassword"
                     name="confirmPassword"
                     type="password"
                   />
