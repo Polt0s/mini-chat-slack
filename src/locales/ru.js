@@ -12,7 +12,7 @@ export default {
       signInbutton: 'Войти',
       notAccount: 'Нет аккаунта?',
       registration: 'Регистрация',
-      incorrectLoginOrPassword: 'Неправильный логин или пароль',
+      incorrectLoginOrPassword: 'Неверные имя пользователя или пароль',
     },
     signUp: {
       username: 'Имя пользователя',
