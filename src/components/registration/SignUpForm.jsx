@@ -62,6 +62,7 @@ const SignUpForm = () => {
                     label={t('signUp.username')}
                     name="username"
                     type="text"
+                    autoFocus="true"
                   />
                 </div>
                 <div className="form-group">

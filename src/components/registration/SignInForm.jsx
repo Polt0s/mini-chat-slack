@@ -55,6 +55,7 @@ const SignInForm = () => {
                     id="username"
                     name="username"
                     type="text"
+                    autoFocus="true"
                   />
                 </div>
                 <div className="form-group">

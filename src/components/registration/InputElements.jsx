@@ -11,6 +11,8 @@ const InputElements = ({ label, ...props }) => {
     <>
       <label htmlFor={id || name}>{label}</label>
       <input
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus={false}
         className={
           meta.error && meta.touched
             ? 'form-control is-invalid'
