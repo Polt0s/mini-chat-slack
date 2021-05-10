@@ -9,7 +9,7 @@ const sendingDataSignUpForm = async (username, password) => {
     if (response.status === 201) {
       localStorage.setItem('user', JSON.stringify(response.data));
     }
-    return { status: response.status };
+    return response.data;
   } catch (err) {
     throw new Error(`Error: ${err}`);
   }
